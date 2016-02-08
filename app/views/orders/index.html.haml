@@ -1,0 +1,46 @@
+.container
+  %h1 Výpis zakázek
+
+
+  .table_responsive
+    %table.table.table-hover.table-striped.sortable-theme-minimal{"data-toggle": "table", "data-search":"true", "pagination":"true", "data-sortable":"true", "data-sort-name": "1", "data-sort-order":"desc", "data-show-export":'true', "data-export-data-type":"all"}
+      %thead
+        %tr
+          %th{"data-sortable":'true'} ID
+          %th{"data-sortable":'true'} Název
+          %th{"data-sortable":'true'} Zákazník
+          %th{"data-sortable":'true', "data-sorter": "dateSorter"} Přijato
+          %th{"data-sortable":'true', "data-sorter": "dateSorter"} Dokončeno
+          %th{"data-sortable":'true', "data-sorter": "dateSorter"} Termín dokončení
+          %th{"data-sortable":'true'} Fakturováno
+          %th{"data-sortable":'true'} Stav
+          %th{"data-sortable":'true'} Čas
+          %th{"data-sortable":'true'} Cena
+          %th{"data-sortable":'true'} Poznámka
+          %th{"data-sortable":'true'} Zadání
+          =#%th{data:{sortable: 'false'}}
+
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %td
+              = order.id
+            %td
+              =#{data:{value: order.name.gsub(' ', '').downcase, entity: 'Order', action: 'show', id: (order.id) }}
+              = link_to order.name, order
+            %td= order.customer.gsub("\n", "<br/>").html_safe
+            %td= order.received_at.nil? ? "" : order.received_at.strftime("%d.%m.%Y")
+            %td= order.finished_at.nil? ? "" : order.finished_at.strftime("%d.%m.%Y")
+            %td= order.deadline_at.nil? ? "" : order.deadline_at.strftime("%d.%m.%Y")
+            %td= order.invoiced ? "Ano" : "Ne" # check_box_tag "invoiced", 1, order.invoiced, :disabled => "disabled"
+            %td= order.state
+            %td= order.spent_time
+            %td= order.price
+            %td= order.comment.size < 15 ? order.comment : order.comment[0..9] + "..."
+            %td= order.description.size < 25 ? order.description : order.description[0..19] + "..."
+  %hr
+  %p
+    = link_to '#', :class => 'btn btn-success', data: { entity: 'Order', action: 'create' } do
+      %i.fa.fa-plus
+      = 'Nová zakázka'
+

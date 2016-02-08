@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  customer: MyString
+  received_at: 2016-01-30 19:00:34
+  finished_at: 2016-01-30 19:00:34
+  deadline_at: 2016-01-30 19:00:34
+  invoiced: false
+  state: MyString
+  spent_time: 1.5
+  price: 1.5
+  comment: MyText
+  description: MyText
+
+two:
+  name: MyString
+  customer: MyString
+  received_at: 2016-01-30 19:00:34
+  finished_at: 2016-01-30 19:00:34
+  deadline_at: 2016-01-30 19:00:34
+  invoiced: false
+  state: MyString
+  spent_time: 1.5
+  price: 1.5
+  comment: MyText
+  description: MyText

@@ -1,0 +1,10 @@
+.container-fluid
+  %h1 Listing time_entries
+  
+  = render "table"
+
+  %hr
+  %p
+    = link_to '#', :class => 'btn btn-success', data: { entity: 'TimeEntry', action: 'create' } do
+      %i.fa.fa-plus
+        = 'New Time entry'

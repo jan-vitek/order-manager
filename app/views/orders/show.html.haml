@@ -1,0 +1,70 @@
+= link_to :controller => :orders, :action => :index do
+  %i.home_button.glyphicon.glyphicon-chevron-left
+.container-fluid.max-width
+  %table.table.table-hover.table-striped{style:"table-layout: fixed"}
+    %tr
+      %td{colspan:8}
+        %h1
+          = @order.name.capitalize
+    %tr
+      %th
+        Zákazník
+      %td{colspan:7}
+        = @order.customer.gsub("\n", "<br/>").html_safe
+    %tr
+      %th
+        Přijato
+      %td
+        = @order.received_at.strftime("%d.%m.%Y<br />%H:%M").html_safe unless @order.received_at.nil?
+      %th
+        Termín dokončení
+      %td
+        = @order.deadline_at.strftime("%d.%m.%Y<br />%H:%M").html_safe unless @order.deadline_at.nil?
+      %th
+        Předáno
+      %td
+        = @order.finished_at.strftime("%d.%m.%Y<br />%H:%M").html_safe unless @order.finished_at.nil?
+      %th
+        Fakturováno
+      %td
+        = @order.invoiced ? "Ano" : "Ne" 
+    %tr
+      %th
+        Stav
+      %td{colspan:3}
+        = @order.state
+      %th
+        Strávený čas
+      %td
+        = @order.spent_time
+      %th
+        Cena
+      %td
+        = @order.price.to_s + "Kč"
+    %tr
+      %th{colspan:8}
+        Poznámka
+    %tr
+      %td{colspan:8}
+        = @order.comment.gsub("\n", "<br/>").html_safe
+    %tr
+      %th{colspan:8}
+        Zadání
+    %tr
+      %td{colspan:8}
+        = @order.description.gsub("\n", "<br/>").html_safe
+    %tr
+      %th{colspan:8}
+        Záznamy o stráveném čase
+    %tr
+      %td{colspan:8}
+        = render "time_entries/table"
+    %tr
+      %td{colspan:4}
+        = link_to '#', :class => 'btn btn-success', data: { entity: 'TimeEntry', action: 'create', order_id: @order.id, user_id: current_user.id } do
+          %i.fa.fa-plus
+          Zapsat čas
+      %td{colspan:4, align:"right"}
+        = link_to '#', :class => 'btn btn-primary', data: { entity: 'Order', action: 'update', id: (@order.id) } do
+          %i.fa.fa-edit
+          Upravit

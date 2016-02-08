@@ -1,0 +1,29 @@
+.container-fluid
+  = simple_form_for(@order, remote_form_options) do |f|
+    = f.error_notification
+    = f.error :base, :error_method => :to_sentence
+
+    .form-inputs
+      = f.input :name
+      = f.input :customer, :as => :text
+      - received_at = Time.now.strftime("%d.%m.%Y %H:%M") if @order.id.nil?
+      - received_at = @order.received_at.strftime("%d.%m.%Y %H:%M") unless @order.received_at.nil?
+      - finished_at = @order.finished_at.strftime("%d.%m.%Y %H:%M") unless @order.finished_at.nil?
+      - deadline_at = @order.deadline_at.strftime("%d.%m.%Y %H:%M") unless @order.deadline_at.nil?
+      = f.input :received_at, as: :date_time_picker, input_html: {:value => received_at}
+      = f.input :finished_at, as: :date_time_picker, input_html: {:value => finished_at} unless @order.id.nil?
+      = f.input :deadline_at, as: :date_time_picker, input_html: {:value => deadline_at}
+      = f.input :invoiced unless @order.id.nil?
+      = f.input :state, collection: %w{Nová Rozpracovaná Korektury Odloženo Dokončeno}, include_blank: false
+      = f.input :spent_time unless @order.id.nil?
+      = f.input :price
+      = f.input :comment
+      = f.input :description
+
+    .form-actions.col-sm-7.col-sm-offset-5
+      = f.button :submit
+
+:javascript
+  $( document ).ready(function() {
+    $('.form_datetime').datetimepicker({format: 'DD.MM.YYYY HH:mm'});
+  })

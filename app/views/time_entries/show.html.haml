@@ -1,0 +1,7 @@
+#content.show
+  %p#notice= notice
+
+  .form-horizontal
+    = show_value 'User', @time_entry.user_id
+    = show_value 'Spent time', @time_entry.spent_time
+    = show_value 'Note', @time_entry.note

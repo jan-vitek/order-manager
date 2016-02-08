@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title OrderManager
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .container
+      - if user_signed_in?
+        = link_to destroy_user_session_path, :method => :delete do
+          %i.logout_button.glyphicon.glyphicon-log-out
+      = yield
+      = bb_alert

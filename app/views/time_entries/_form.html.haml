@@ -1,0 +1,13 @@
+.container-fluid
+  = simple_form_for(@time_entry, remote_form_options) do |f|
+    = f.error_notification
+    = f.error :base, :error_method => :to_sentence
+
+    .form-inputs
+      = f.input :user_id, :as => :hidden
+      = f.input :order_id, :as => :hidden
+      = f.input :spent_time
+      = f.input :note
+
+    .form-actions.col-sm-7.col-sm-offset-5
+      = f.button :submit
