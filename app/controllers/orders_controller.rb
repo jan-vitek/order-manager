@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :time_entries]
 
   # GET /orders
   def index
@@ -78,6 +78,11 @@ class OrdersController < ApplicationController
         format.js { render status: :forbidden }
       end
     end
+  end
+
+  def time_entries
+    @time_entries = @order.time_entries
+    render partial: "time_entries/table"
   end
 
   private

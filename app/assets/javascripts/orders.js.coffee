@@ -15,12 +15,20 @@ Order.setButton = (target_class) ->
   $('#order_control').removeClass()
   $('#order_control').addClass('glyphicon')
   $('#order_control').addClass(target_class)
+  if (target_class == "glyphicon-play")
+    $('#order_control').addClass('text-success')
+  else
+    $('#order_control').addClass('text-danger')
+
+Order.loadTimeEntriesTable = () ->
+  $('#time_entries_table').load("/orders/" + Order.id + "/time_entries")
 
 Order.startTimeLogging = () ->
   console.log("Logging time for order " + Order.id)
   Order.setButton('glyphicon-pause')
   Order.lastSuccessfulTry = Date.now()
   Order.intervalId = setInterval(Order.increaseRequest, 5000);  
+  setTimeout(Order.loadTimeEntriesTable, 10000)
 
 Order.increaseRequest = () ->
   Order.lastTry = Date.now()
@@ -41,7 +49,7 @@ Order.pauseTimeLogging = (reason = "") ->
   clearInterval(Order.intervalId)
 
 Order.controlButtonListener = (obj) ->
-  if (obj.className == "glyphicon glyphicon-play")
+  if (obj.className == "glyphicon glyphicon-play text-success")
     Order.startTimeLogging()
   else
     Order.pauseTimeLogging("pause button")

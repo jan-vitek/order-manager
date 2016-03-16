@@ -8,7 +8,8 @@
           = @order.name.capitalize
       %td{align: "right"}
         %h1
-          %i.glyphicon.glyphicon-play#order_control{onClick: 'Order.controlButtonListener(this); return false;'}
+          %i.glyphicon.glyphicon-file.text-info{onClick: "location.href = \"/data/#{@order.id}\""}
+          %i.glyphicon.glyphicon-play.text-success#order_control{onClick: 'Order.controlButtonListener(this); return false;'}
     %tr
       %th
         Zákazník
@@ -60,7 +61,7 @@
       %th{colspan:8}
         Záznamy o stráveném čase
     %tr
-      %td{colspan:8}
+      %td#time_entries_table{colspan:8}
         = render "time_entries/table"
     %tr
       %td{colspan:4}

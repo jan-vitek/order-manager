@@ -7,6 +7,7 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def spent_time
+    return 0 if self[:spent_time].nil?
     self[:spent_time].round(3)
   end
 end
