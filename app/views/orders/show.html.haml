@@ -3,9 +3,12 @@
 .container-fluid.max-width
   %table.table.table-hover.table-striped{style:"table-layout: fixed"}
     %tr
-      %td{colspan:8}
+      %td{colspan:7}
         %h1
           = @order.name.capitalize
+      %td{align: "right"}
+        %h1
+          %i.glyphicon.glyphicon-play#order_control{onClick: 'Order.controlButtonListener(this); return false;'}
     %tr
       %th
         Zákazník
@@ -35,7 +38,7 @@
         = @order.state
       %th
         Strávený čas
-      %td
+      %td#spent_time
         = @order.spent_time
       %th
         Cena
@@ -68,3 +71,14 @@
         = link_to '#', :class => 'btn btn-primary', data: { entity: 'Order', action: 'update', id: (@order.id) } do
           %i.fa.fa-edit
           Upravit
+
+:javascript
+  $( document ).ready(function() {
+    Order.id = #{@order.id}
+    Order.userId = #{current_user.id}
+  });
+//  $( document ).ready(function() {
+//    var timeout = 5 * 60 * 1000
+//    console.log( "Waiting " + (timeout/1000) + " seconds to start logging" );
+//    setTimeout(function(){Order.startTimeLogging(#{@order.id})}, timeout);
+//  });

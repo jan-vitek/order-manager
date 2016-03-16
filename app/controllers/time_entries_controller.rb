@@ -10,6 +10,19 @@ class TimeEntriesController < ApplicationController
     end
   end
 
+  def log_time
+    user = User.find_by_id(params[:user_id])
+    order = Order.find_by_id(params[:order_id])
+    seconds = params[:seconds]
+    if user.nil? or order.nil? or seconds.nil?
+      head 400
+      return
+    end
+    entry = TimeEntry.where(order_id: order.id, user_id: user.id).first_or_create
+    entry.increase_time(seconds)
+    render json: {time_entry_id: entry.id, spent_time: entry.spent_time, sent_time: params[:sent_time], order_spent_time: order.spent_time}  
+  end
+
   # GET /time_entries/1
   def show
     respond_to do |format|

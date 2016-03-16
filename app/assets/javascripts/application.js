@@ -20,6 +20,7 @@
 //= require bootstrap-datetimepicker
 //= require extensions/bootstrap-table-export
 //= require bootbox_crud_main
+//= require orders
 //= require_tree .
 
 dateSorter = function(a, b) {

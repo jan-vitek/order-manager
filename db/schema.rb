@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207155430) do
+ActiveRecord::Schema.define(version: 20160221125755) do
 
   create_table "orders", force: true do |t|
     t.string   "name"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160207155430) do
 
   create_table "time_entries", force: true do |t|
     t.integer  "user_id"
-    t.float    "spent_time"
+    t.float    "spent_time", default: 0.0
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"

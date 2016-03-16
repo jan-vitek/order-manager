@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
+
+  get '/time_entries/log_time', to: 'time_entries#log_time'
   resources :time_entries
+
 
   resources :orders
 

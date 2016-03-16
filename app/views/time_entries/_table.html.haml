@@ -11,7 +11,8 @@
       - @time_entries.each do |time_entry|
         %tr
           %td= time_entry.user.name
-          %td= time_entry.spent_time.to_s
+          %td.time_entry[time_entry] 
+            = time_entry.spent_time.to_s
           %td= time_entry.note
           %td{align:"right"}
             = link_to '#', :class => 'btn-sm btn-primary', data: { entity: 'TimeEntry', action: 'update', id: (time_entry.id) } do
