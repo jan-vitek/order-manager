@@ -88,7 +88,6 @@ class OrdersController < ApplicationController
   def assign_to_user
     User.find(params[:user_id]).update_attributes(active_order_id: @order.id)
     render :nothing => true, :status => 200, :content_type => 'text/html'
-
   end
 
   private

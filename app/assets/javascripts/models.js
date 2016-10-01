@@ -5,5 +5,7 @@
 //!!! Generator adds after this line, do not delete it !!!
 BBCrud.Models.add('TimeEntry', '/time_entries/', 'time_entry');
 BBCrud.Models.add('Order', '/orders/', 'order');
+BBCrud.Models.add('User', '/users/', 'user');
+
 // e.g. BBCrud.Models.add('Customer', '/customers/', 'customer');
 

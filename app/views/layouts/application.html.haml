@@ -9,7 +9,17 @@
   %body
     .container
       - if user_signed_in?
-        = link_to destroy_user_session_path, :method => :delete do
-          %i.logout_button.glyphicon.glyphicon-log-out
+        .dropdown
+          %i.dropdown-toggle.menu_button.glyphicon.glyphicon-menu-hamburger#dropdown-menu{"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}
+          %ul.dropdown-menu{"aria-labelledby":"dropdown-menu"}
+            %li
+              = link_to "/users" do
+                %b.logout_button.glyphicon.glyphicon-user
+                %label.logout_label Uživatelé
+            %li
+              = link_to destroy_user_session_path, :method => :delete do
+                %b.logout_button.glyphicon.glyphicon-log-out
+                %label.logout_label Odhlásit se
+
       = yield
       = bb_alert

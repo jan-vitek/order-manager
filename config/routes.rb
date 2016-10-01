@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/time_entries/log_time', to: 'time_entries#log_time'
   resources :time_entries
-
+  resources :users
 
   resources :orders do
     member do

@@ -23,6 +23,12 @@
 //= require orders
 //= require_tree .
 
+$(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        Turbolinks.visit($(this).data("href"));
+    });
+});
+
 dateSorter = function(a, b) {
   a = a.split('.').reverse().join('.');
   b = b.split('.').reverse().join('.');

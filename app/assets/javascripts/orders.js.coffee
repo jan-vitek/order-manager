@@ -30,7 +30,7 @@ Order.startTimeLogging = () ->
   Order.intervalId = setInterval(Order.increaseRequest, 5000);  
   setTimeout(Order.loadTimeEntriesTable, 10000)
   $.post("/orders/" + Order.id + "/assign_to_user", { user_id: Order.userId }, 
-    function(returnedData){
+    (returnedData) -> {
     });
 
 Order.increaseRequest = () ->
