@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :time_entries]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :time_entries, :assign_to_user]
 
   # GET /orders
   def index
@@ -83,6 +83,12 @@ class OrdersController < ApplicationController
   def time_entries
     @time_entries = @order.time_entries
     render partial: "time_entries/table"
+  end
+
+  def assign_to_user
+    User.find(params[:user_id]).update_attributes(active_order_id: @order.id)
+    render :nothing => true, :status => 200, :content_type => 'text/html'
+
   end
 
   private

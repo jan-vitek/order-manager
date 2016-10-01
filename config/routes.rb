@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   resources :time_entries
 
 
-  resources :orders
+  resources :orders do
+    member do
+      get 'time_entries'
+      post 'assign_to_user'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

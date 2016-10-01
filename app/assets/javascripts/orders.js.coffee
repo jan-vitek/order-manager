@@ -29,6 +29,9 @@ Order.startTimeLogging = () ->
   Order.lastSuccessfulTry = Date.now()
   Order.intervalId = setInterval(Order.increaseRequest, 5000);  
   setTimeout(Order.loadTimeEntriesTable, 10000)
+  $.post("/orders/" + Order.id + "/assign_to_user", { user_id: Order.userId }, 
+    function(returnedData){
+    });
 
 Order.increaseRequest = () ->
   Order.lastTry = Date.now()

@@ -4,7 +4,10 @@ class Order < ActiveRecord::Base
 
   def create_data_dir
     require 'fileutils'
-    FileUtils.mkpath('public/data/'+self.id.to_s)
+    path='public/data/'+self.id.to_s
+    FileUtils.mkpath(path)
+    FileUtils.chmod 0777, path
+    
   end 
 
   def spent_time
