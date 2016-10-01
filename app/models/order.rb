@@ -13,6 +13,6 @@ class Order < ActiveRecord::Base
   def spent_time
     return "0h" if self.time_entries.count == 0
     entries = self.time_entries.map{|e| e.spent_time}
-    entries.sum.to_s + "h"
+    entries.sum.round(2).to_s + "h"
   end
 end

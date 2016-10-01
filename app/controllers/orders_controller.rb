@@ -3,11 +3,16 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.order('lower(name)').all
+    @orders = Order.where(invoiced: nil).order('lower(name)').all
     respond_to do |format|
       format.html
       format.json { render json: @orders }
     end
+  end
+
+  def all
+    @orders = Order.order('lower(name)').all
+    render 'index'
   end
 
   # GET /orders/1

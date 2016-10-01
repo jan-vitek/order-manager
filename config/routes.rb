@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       get 'time_entries'
       post 'assign_to_user'
     end
+    collection do
+      get 'all'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
