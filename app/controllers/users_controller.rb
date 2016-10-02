@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  before_filter :check_if_admin
   # GET /users
   def index
     @users = User.all
@@ -85,25 +86,24 @@ class UsersController < ApplicationController
     end
   end
 
-  def housekeeper_load
-    #[JV] toto nemůže totkto být, po změně přiřazení se nezmění updated_at, zvážit
-    #  nastavení updated_at u assignmentu po změně housekeeperů
-    #if stale?(last_modified: Assignment.maximum(:updated_at).utc, template: false)
-      respond_to do |format|
-        format.json {render :json => User.housekeeper_load_json}
-      end
-    #end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def check_if_admin
+      if signed_in?
+        render text: "Only admins allowed!" unless current_user.admin
+      else
+        render text: 'Please sign in!'
+      end
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:admin ,:name, :email, :password, :password_confirmation)
     end
 
 end

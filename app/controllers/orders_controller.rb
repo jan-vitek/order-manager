@@ -3,7 +3,12 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.where(invoiced:[nil,false]).order('lower(name)').all
+    if current_user.admin
+      @orders = Order.where(invoiced:[nil,false]).order('lower(name)').all
+    else
+      @orders = current_user.orders.where(invoiced:[nil,false]).order('lower(name)').all
+    end
+
     respond_to do |format|
       format.html
       format.json { render json: @orders }
@@ -11,7 +16,12 @@ class OrdersController < ApplicationController
   end
 
   def all
-    @orders = Order.order('lower(name)').all
+    if current_user.admin
+      @orders = Order.order('lower(name)').all
+    else
+      @orders = current_user.orders.order('lower(name)').all
+    end
+
     render 'index'
   end
 
@@ -103,6 +113,6 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:color, :name, :customer, :received_at, :finished_at, :deadline_at, :invoiced, :state, :spent_time, :price, :comment, :description)
+      params.require(:order).permit(:color, :name, :customer, :received_at, :finished_at, :deadline_at, :invoiced, :state, :spent_time, :price, :comment, :description,:user_ids => [])
     end
 end

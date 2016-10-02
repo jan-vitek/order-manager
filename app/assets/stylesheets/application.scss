@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-table";
+@import "bootstrap-select.min";
 @import 'bootstrap-datetimepicker';
 @import 'simplecolorpicker/jquery.simplecolorpicker';
 
@@ -42,11 +43,9 @@
   color: black;
   font-size: 25px;
 }
-.dropdown-menu {
-  background: lightgrey;
+.orders-menu {
   margin: 0;
   position: absolute;
-  width: 225px;
   top: 40px;
   right: 10px;
   left: auto;

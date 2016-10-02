@@ -6,6 +6,7 @@
     .form-inputs
       = f.input :name
       = f.input :customer, :as => :text
+      = f.association :users, collection: User.all.map{|u| [u.name, u.id]}
       - received_at = Time.now.strftime("%d.%m.%Y %H:%M") if @order.id.nil?
       - received_at = @order.received_at.strftime("%d.%m.%Y %H:%M") unless @order.received_at.nil?
       - finished_at = @order.finished_at.strftime("%d.%m.%Y %H:%M") unless @order.finished_at.nil?
@@ -38,4 +39,5 @@
   $( document ).ready(function() {
     $('.form_datetime').datetimepicker({format: 'DD.MM.YYYY HH:mm'});
     $('#order_color').simplecolorpicker()
+    $('#order_user_ids').selectpicker()
   })

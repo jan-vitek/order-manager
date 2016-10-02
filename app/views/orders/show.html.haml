@@ -13,8 +13,12 @@
     %tr
       %th
         Zákazník
-      %td{colspan:7}
+      %td{colspan:3}
         = @order.customer.gsub("\n", "<br/>").html_safe
+      %th
+        Pracovníci
+      %td{colspan:3}
+        = @order.users.map{|u| u.name}.join(", ").html_safe
     %tr
       %th
         Přijato
