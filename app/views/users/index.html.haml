@@ -1,0 +1,39 @@
+= link_to :controller => :orders, :action => :index do
+  %i.home_button.glyphicon.glyphicon-chevron-left
+.container.max-width
+  %h1 Uživatelé
+  .table_responsive
+    %table.table.table-hover.table-striped.sortable-theme-minimal{data: {toggle: "table", search: "true", "filter-control" => "true"}}
+      %thead
+        %tr
+          %th{data:{field: "user_ID", "filter-control" => "input"}}
+            ID
+          %th{data:{field: 'name', "filter-control" => "input", sorted_direction: 'ascending' }}
+            Jméno
+          %th{data:{field: "user_email", "filter-control" => "input"}}
+            E-Mail
+          %th{data:{}}
+
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.id
+            %td= user.name
+            %td= user.email
+            %td
+              = link_to '#', :class => 'btn btn-xs btn-info', data: { entity: 'User', action: 'update', id: (user.id) } do
+                %i.glyphicon.glyphicon-edit
+  %hr
+  %p
+    = link_to '#', :class => 'btn btn-success', data: { entity: 'User', action: 'create' } do
+      %i.fa.fa-plus
+      = 'Nový uživatel'
+
+:javascript
+
+  $(document).ready(function(){
+
+    var table = $('[data-toggle="table"]')
+    table.bootstrapTable();
+
+    })

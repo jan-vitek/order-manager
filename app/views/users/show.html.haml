@@ -1,0 +1,14 @@
+#content.show
+  %p#notice= notice
+
+  .form-horizontal
+    =# show_value 'Name', "#{@user.name} (#{@user.username}) <br> #{@user.level}".html_safe
+    =# show_value 'E-mail', @user.email
+    =# show_value 'Level', @user.level
+    = show_value t('user.first_name'), @user.first_name
+    = show_value t('user.last_name'), @user.last_name
+    = show_value t('user.username'), @user.username
+    = show_value t('user.language'), @user.locale
+    = show_value t('user.role'), @user.levels.pluck(:name).join(", ")
+    - @user.contact_fields.each do |contact_field|
+      = show_value contact_field.contact_type.try(:name), contact_field.value

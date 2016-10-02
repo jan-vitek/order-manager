@@ -1,0 +1,14 @@
+.container-fluid
+  = simple_form_for(@user, remote_form_options) do |f|
+    = f.error_notification
+    = f.error :base, :error_method => :to_sentence
+
+    .form-inputs
+      = f.input :name
+      = f.input :email
+      = f.input :password #if @user.id.nil?
+      = f.input :password_confirmation
+    .form-actions.col-sm-7.col-sm-offset-5
+      = f.button :submit
+
+
