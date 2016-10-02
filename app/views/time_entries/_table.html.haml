@@ -10,7 +10,7 @@
     %tbody
       - @time_entries.each do |time_entry|
         %tr
-          %td= time_entry.user.name
+          %td= time_entry.user.try(:name)
           %td.time_entry[time_entry] 
             = time_entry.spent_time.to_s
           %td= time_entry.note

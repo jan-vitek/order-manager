@@ -3,7 +3,7 @@
 
 
   .table_responsive
-    %table.table.table-hover.table-striped.sortable-theme-minimal{"data-toggle": "table", "data-search":"true", "pagination":"true", "data-sortable":"true", "data-sort-name": "0", "data-sort-order":"desc", "data-show-export":'true', "data-export-data-type":"all", "data-show-columns":"true"}
+    %table.table.table-hover.table-striped.sortable-theme-minimal{"data-toggle": "table","data-row-style":"rowStyle", "data-search":"true", "pagination":"true", "data-sortable":"true", "data-sort-name": "0", "data-sort-order":"desc", "data-show-export":'true', "data-export-data-type":"all", "data-show-columns":"true"}
       %thead
         %tr
           %th{"data-sortable":'true'} ID
@@ -22,7 +22,7 @@
 
       %tbody
         - @orders.each do |order|
-          %tr.clickable-row{data: {href:"/orders/#{order.id}"}}
+          %tr.clickable-row{data: {href:"/orders/#{order.id}", color: order.color}}
             %td
               = order.id
             %td= order.name
@@ -42,3 +42,10 @@
       %i.fa.fa-plus
       = 'Nová zakázka'
 
+:javascript
+  function rowStyle(row, index) {
+
+    return{
+     css: { "background-color": row._data.color }
+    }
+  }

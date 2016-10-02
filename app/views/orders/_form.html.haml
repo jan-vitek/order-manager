@@ -13,6 +13,17 @@
       = f.input :received_at, as: :date_time_picker, input_html: {:value => received_at}
       = f.input :finished_at, as: :date_time_picker, input_html: {:value => finished_at} unless @order.id.nil?
       = f.input :deadline_at, as: :date_time_picker, input_html: {:value => deadline_at}
+      - colors= [["Green","#7bd148"],
+                ["Bold blue", "#5484ed"],
+                ["Blue","#a4bdfc"],
+                ["Turquoise","#46d6db"],
+                ["Light green","#7ae7bf"],
+                ["Bold green","#51b749"],
+                ["Yellow","#fbd75b"],
+                ["Orange","#ffb878"],
+                ["Red","#ff887c"],
+                ["Bold red","#dc2127"]]
+      = f.input :color, collection: colors
       = f.input :invoiced unless @order.id.nil?
       = f.input :state, collection: %w{Nová Rozpracovaná Korektury Odloženo Dokončeno}, include_blank: false
       = f.input :spent_time unless @order.id.nil?
@@ -26,4 +37,5 @@
 :javascript
   $( document ).ready(function() {
     $('.form_datetime').datetimepicker({format: 'DD.MM.YYYY HH:mm'});
+    $('#order_color').simplecolorpicker()
   })
